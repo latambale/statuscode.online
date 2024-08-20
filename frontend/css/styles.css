@@ -1,0 +1,13 @@
+body {
+    background-color: #212121;
+    color: #a3a3a3;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+}
