@@ -1,10 +1,15 @@
 const http = require('http');
 const https = require('https');
 const url = require('url');
+const monitors = [];
 
-const startMonitoring = (req, res) => {
-    const { url } = req.body;
-    res.json({ message: 'Monitoring started for ' + url });
+let monitorId = 0;
+
+const addMonitor = (req, res) => {
+    const { url, frequency } = req.body;
+    const id = monitorId++;
+    monitors.push({ id, url, frequency });
+    res.json({ id, message: 'Monitor added for ' + url });
 };
 
 const checkUrl = (req, res) => {
@@ -24,4 +29,15 @@ const checkUrl = (req, res) => {
     });
 };
 
-module.exports = { startMonitoring, checkUrl };
+const deleteMonitor = (req, res) => {
+    const { id } = req.params;
+    const index = monitors.findIndex(monitor => monitor.id == id);
+    if (index !== -1) {
+        monitors.splice(index, 1);
+        res.json({ success: true, message: 'Monitor deleted' });
+    } else {
+        res.json({ success: false, message: 'Monitor not found' });
+    }
+};
+
+module.exports = { addMonitor, checkUrl, deleteMonitor };

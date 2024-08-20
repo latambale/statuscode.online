@@ -11,3 +11,15 @@ body {
     background-color: #1a73e8;
     border-color: #1a73e8;
 }
+
+.status-message {
+    font-weight: bold;
+}
+
+.text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
