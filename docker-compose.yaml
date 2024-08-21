@@ -1,0 +1,22 @@
+services:
+  web:
+    container_name: watchmysite_webapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pktriot
+    networks:
+      - watchmysite-network
+
+  pktriot:
+    container_name: watchmysite_tunnel
+    image: saurabhlatambale/watchmysite.online:latestv1
+    networks:
+      - watchmysite-network
+
+networks:
+  watchmysite-network:
+    driver: bridge
